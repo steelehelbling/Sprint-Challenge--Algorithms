@@ -97,7 +97,27 @@ class SortingRobot:
         Sort the robot's list.
         """
         # Fill this out
-        pass
+        if self.light_is_on() == False:#checks if this is the first element
+            while self.can_move_right(): 
+                self.move_right()
+            self.swap_item()    #grabs last item 
+
+        self.set_light_off()
+
+        while self.can_move_left(): 
+            self.move_left()
+            if self.compare_item() == -1: #compars current item to item on ground if less 
+                self.swap_item() #swap item
+
+        while self.can_move_right() and self.compare_item() != None : #compairs item and lets it know if at staring postion
+            self.move_right()#not there yet
+        self.swap_item() #moves to sorted found highest value in list
+
+        if self.can_move_left():
+            self.move_left()  #moves to next number
+            self.swap_item()
+            self.set_light_on()
+            self.sort() #runs hole thing again to find the next highest number     
 
 
 if __name__ == "__main__":
